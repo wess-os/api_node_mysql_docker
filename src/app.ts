@@ -4,6 +4,7 @@ import cors from "cors";
 import { Code } from "./enum/code.enum";
 import { HttpResponse } from "./domain/response";
 import { Status } from "./enum/status.enum";
+import patientRoutes from "./routes/patient.routes";
 
 export class App {
 
@@ -35,7 +36,7 @@ export class App {
 
     private routes(): void {
 
-        this.app.use('/patients', (req, res) => {});
+        this.app.use('/patients', patientRoutes);
         this.app.get('/', (req, res) => res.status(Code.OK).send(new HttpResponse(Code.OK, Status.OK, 'Welcome to the API')));
         this.app.all('*', (req, res) => res.status(Code.NOT_FOUND).send(new HttpResponse(Code.NOT_FOUND, Status.NOT_FOUND, this.ROUTE_NOT_FOUND)));
 
